@@ -55,18 +55,16 @@ export function useSimpleDeDuplicate<T, R>(
  * const result = useRemoveDuplicates(arr);
  * ```
  */
-export function useDeDuplicate<T>(arr: T[]) {
+export function useDeDuplicate<T extends Record<PropertyKey, any>>(arr: T[]) {
   if (!arr.length) return arr;
   if (!isObjectArray(arr)) {
     return Array.from(new Set(arr));
   }
-  // type-coverage:ignore-next-line
-  let _arr = arr as Record<PropertyKey, unknown>[];
-  for (let i = 0; i < _arr.length; i++) {
-    const outer = _arr[i];
+  for (let i = 0; i < arr.length; i++) {
+    const outer = arr[i];
     const outerKeys = Object.keys(outer);
-    for (let j = i + 1; j < _arr.length; j++) {
-      const inner = _arr[j];
+    for (let j = i + 1; j < arr.length; j++) {
+      const inner = arr[j];
       const innerKeys = Object.keys(inner);
       if (outerKeys.length !== innerKeys.length) continue;
 
@@ -75,13 +73,13 @@ export function useDeDuplicate<T>(arr: T[]) {
       });
 
       if (isMatch) {
-        _arr = _arr.toSpliced(j, 1);
+        arr = arr.toSpliced(j, 1);
         j--;
       }
     }
   }
 
-  return _arr;
+  return arr;
 }
 
 function isObject(obj: unknown): obj is Record<PropertyKey, unknown> {
