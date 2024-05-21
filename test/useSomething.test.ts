@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { useRemoveDuplicates, useSimpleRemoveDuplicates } from '../src/useSomething';
+import { useDeDuplicate, useSimpleDeDuplicate } from '../src/useSomething';
 
 describe('test', () => {
   it('Object Array remove duplicated', () => {
@@ -8,7 +8,7 @@ describe('test', () => {
       { id: 2, name: 'b' },
       { id: 1, name: 'c' }
     ];
-    const result = useRemoveDuplicates(arr);
+    const result = useDeDuplicate(arr);
     expect(result).toEqual([
       { id: 1, name: 'a' },
       { id: 2, name: 'b' },
@@ -18,7 +18,7 @@ describe('test', () => {
 
   it('Primitive Array remove duplicated', () => {
     const arr = [1, 2, 1];
-    const result = useSimpleRemoveDuplicates(arr);
+    const result = useSimpleDeDuplicate(arr);
     expect(result).toEqual([1, 2]);
   });
 });

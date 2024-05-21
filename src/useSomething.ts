@@ -25,7 +25,7 @@
  * const result = useRemoveDuplicates(arr, (item) => item.id);
  * ```
  */
-export function useSimpleRemoveDuplicates<T, R>(
+export function useSimpleDeDuplicate<T, R>(
   arr: T[],
   getTarget?: (item: T) => R
 ) {
@@ -55,7 +55,7 @@ export function useSimpleRemoveDuplicates<T, R>(
  * const result = useRemoveDuplicates(arr);
  * ```
  */
-export function useRemoveDuplicates<T>(arr: T[]) {
+export function useDeDuplicate<T>(arr: T[]) {
   if (!arr.length) return arr;
   if (!isObjectArray(arr)) {
     return Array.from(new Set(arr));
